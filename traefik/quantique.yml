@@ -1,0 +1,18 @@
+# Bloc à fusionner dans le fichier dynamique de Traefik (monté sur /dynamic.yml).
+# Ajouter le routeur sous la clé http.routers existante, et le service sous http.services :
+# ne pas recopier les lignes "http:", "routers:" et "services:" si elles existent déjà.
+http:
+  routers:
+    quantique:
+      rule: "Host(`quantique.romainmurier.com`)"
+      entryPoints:
+        - websecure
+      service: quantique
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    quantique:
+      loadBalancer:
+        servers:
+          - url: "http://quantique:80"

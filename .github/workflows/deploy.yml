@@ -1,0 +1,60 @@
+name: Déployer quantique.romainmurier.com
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+  workflow_dispatch:
+
+concurrency:
+  group: quantique-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: 🚀 Deploy to Airflow VPS
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      SERVER_HOST: ${{ secrets.SERVER_HOST }}
+      SERVER_USER: ${{ secrets.SERVER_USER }}
+      SERVER_PORT: ${{ secrets.SERVER_PORT || '22' }}
+      TARGET_DIR: /opt/quantique/site
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Préparer la connexion SSH
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          ssh-keyscan -p "$SERVER_PORT" "$SERVER_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          if [ -n "$SSH_KEY" ]; then
+            printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+            chmod 600 ~/.ssh/id_ed25519
+          else
+            sudo apt-get install -y -qq sshpass
+          fi
+
+      - name: Envoyer le site sur le serveur
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          # Clé SSH si le secret SSH_KEY existe, sinon le mot de passe SERVER_PASSWORD (comme les dépôts Airflow)
+          if [ -n "$SSH_KEY" ]; then
+            RSH="ssh -p $SERVER_PORT -i $HOME/.ssh/id_ed25519"
+          else
+            RSH="sshpass -e ssh -p $SERVER_PORT"
+          fi
+          rsync -az --delete --chmod=D755,F644 -e "$RSH" \
+            site/ "$SERVER_USER@$SERVER_HOST:$TARGET_DIR/"
+
+      - name: Vérifier que le site répond
+        run: |
+          sleep 2
+          curl -fsS -o /dev/null -w "Sources : HTTP %{http_code}\n" https://quantique.romainmurier.com/
+          curl -fsS -o /dev/null -w "Jeu : HTTP %{http_code}\n" https://quantique.romainmurier.com/jeu/
+          echo "Déployé sur https://quantique.romainmurier.com" >> "$GITHUB_STEP_SUMMARY"

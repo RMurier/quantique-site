@@ -1,0 +1,16 @@
+# À placer sur le VPS Airflow dans /opt/quantique, à côté du dossier site/
+# Un nginx minuscule sert les fichiers. Aucun port publié : Traefik le joint par le réseau traefik-net,
+# et la route est déclarée dans le fichier dynamique de Traefik (voir traefik/quantique.yml).
+services:
+  quantique:
+    image: nginx:1.27-alpine
+    container_name: quantique
+    restart: unless-stopped
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:
+    external: true
