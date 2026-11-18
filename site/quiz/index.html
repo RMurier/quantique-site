@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz : vrai ou faux — Informatique quantique</title>
+<meta name="description" content="9 idées reçues sur l’ordinateur quantique, dont les 6 de la présentation « Introduction à l’informatique quantique ». Vrai, faux, ou ça dépend ? Forum Technique 2026, MAALSI 25-2.">
+<meta name="theme-color" content="#060a22">
+<link rel="canonical" href="https://quantique.romainmurier.com/quiz/">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Introduction à l’informatique quantique">
+<meta property="og:title" content="Quiz : vrai ou faux — Informatique quantique">
+<meta property="og:description" content="9 idées reçues sur l’ordinateur quantique. Vrai, faux, ou ça dépend ? Forum Technique 2026, MAALSI 25-2.">
+<meta property="og:url" content="https://quantique.romainmurier.com/quiz/">
+<meta property="og:image" content="https://quantique.romainmurier.com/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quiz vrai ou faux sur l’informatique quantique. Forum Technique 2026, MAALSI 25-2.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060a22;
+  --surface:rgba(255,255,255,.05);
+  --surface-hi:rgba(255,255,255,.085);
+  --line:rgba(140,160,255,.2);
+  --text:#eef1ff;
+  --muted:#a8b1df;
+  --faint:#7079b3;
+  --grad:linear-gradient(110deg,#1fa2ff,#7b3fe4 55%,#b02fe0);
+  --ok:#3ee0a1;
+  --warn:#ffb547;
+  --bad:#ff5d7a;
+  --display:"Exo 2","Trebuchet MS",sans-serif;
+  --body:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:radial-gradient(ellipse at 0% 0%,#1a2370 0%,transparent 50%),radial-gradient(ellipse at 100% 60%,#2c1063 0%,transparent 45%),var(--bg);
+  background-color:var(--bg);
+  color:var(--text);font-family:var(--body);line-height:1.55;font-size:16px;
+}
+a{color:inherit}
+.wrap{max-width:860px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+
+/* Barre de navigation du site (commune aux pages) */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(6,10,34,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:860px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:56px}
+.brand{display:flex;align-items:center;gap:8px;font-family:var(--display);font-style:italic;font-weight:800;font-size:14.5px;letter-spacing:.3px;text-decoration:none;color:var(--text);white-space:nowrap;flex:none}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--grad);flex:none}
+.topnav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{flex:none;font:600 13.5px/1 var(--body);color:var(--muted);text-decoration:none;padding:9px 13px;border-radius:999px;white-space:nowrap;transition:background .15s,color .15s}
+.topnav a:hover{color:var(--text);background:rgba(255,255,255,.08)}
+.topnav a.is-on{color:var(--text);background:rgba(255,255,255,.1);border:1px solid var(--line)}
+.topnav a:focus-visible,.brand:focus-visible{outline:3px solid #5fd6ff;outline-offset:2px}
+
+/* En-tête */
+.hero{padding-top:clamp(28px,6vw,48px);padding-bottom:4px}
+.kicker{font-family:var(--display);font-style:italic;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(28px,5.5vw,44px);line-height:1.05;margin-top:8px;text-wrap:balance;max-width:20ch}
+.lead{margin-top:12px;color:var(--muted);font-size:clamp(15.5px,1.8vw,17.5px);max-width:60ch}
+
+/* Jeu : vrai ou faux */
+.game{padding:28px 0 6px}
+.quiz{max-width:760px;border-radius:20px;padding:clamp(18px,3vw,28px);background:linear-gradient(#0f1640,#0f1640) padding-box,var(--grad) border-box;border:1px solid transparent}
+.q-top{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.q-top b{color:var(--text);font-weight:600}
+.q-bar{height:4px;border-radius:4px;background:rgba(255,255,255,.08);margin:10px 0 18px;overflow:hidden}
+.q-bar i{display:block;height:100%;width:0;background:var(--grad);transition:width .3s}
+.q-text{font-family:var(--display);font-style:italic;font-weight:700;font-size:clamp(21px,3.4vw,28px);line-height:1.22;text-wrap:balance}
+.q-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:20px}
+.q-choices button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:58px;padding:8px 6px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--text);font:600 15px/1.15 var(--body);cursor:pointer;transition:background .15s,border-color .15s,opacity .15s}
+.q-choices .ic{font-size:19px;line-height:1;font-weight:700}
+.q-choices [data-a="vrai"] .ic{color:var(--ok)}
+.q-choices [data-a="nuance"] .ic{color:var(--warn)}
+.q-choices [data-a="faux"] .ic{color:var(--bad)}
+.q-choices button:hover:not(:disabled){border-color:rgba(95,214,255,.55);background:var(--surface-hi)}
+.q-choices button:focus-visible{outline:3px solid #5fd6ff;outline-offset:2px}
+.q-choices button:disabled{cursor:default}
+.q-choices button.is-right{border-color:var(--ok);background:rgba(62,224,161,.15)}
+.q-choices button.is-wrong{border-color:var(--bad);background:rgba(255,93,122,.15)}
+.q-choices button.is-dim{opacity:.4}
+.q-answer{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.q-verdict{font-weight:700;font-size:17px}
+.q-verdict.ok{color:var(--ok)}
+.q-verdict.near{color:var(--warn)}
+.q-verdict.ko{color:var(--bad)}
+.q-exp{margin-top:6px;color:#c9cff0;font-size:15px;line-height:1.55}
+.q-src{display:inline-block;margin-top:8px;font-size:13.5px;color:var(--muted);text-underline-offset:3px}
+.q-src:hover{color:var(--text)}
+.quiz .q-next{margin-top:16px;width:100%}
+.q-score{font-family:var(--display);font-style:italic;font-weight:800;font-size:clamp(44px,8vw,64px);line-height:1;font-variant-numeric:tabular-nums}
+.q-score span{font-size:.5em;color:var(--muted)}
+.q-msg{margin-top:8px;font-size:17px;font-weight:600}
+.recap{list-style:none;margin-top:18px;display:grid;gap:8px}
+.recap li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
+.recap .ic{font-weight:800;font-size:18px;line-height:1.3;text-align:center}
+.recap .r-vrai{color:var(--ok)}
+.recap .r-nuance{color:var(--warn)}
+.recap .r-faux{color:var(--bad)}
+.recap b{display:block;font-weight:600;font-size:15px;line-height:1.35}
+.recap small{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
+.recap .you{font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.recap .you.ok{color:var(--ok)}
+.recap .you.ko{color:var(--faint)}
+.quiz .cta{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 18px;border-radius:999px;font:600 15px/1.2 var(--body);text-decoration:none;color:var(--text);border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.btn:hover{border-color:rgba(95,214,255,.5);background:var(--surface-hi)}
+.btn.primary{background:var(--grad);border-color:transparent;color:#fff}
+.btn.primary:hover{filter:brightness(1.12)}
+.btn:focus-visible{outline:3px solid #5fd6ff;outline-offset:2px}
+
+footer{margin:40px auto 32px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--faint)}
+footer strong{color:var(--muted);font-weight:600}
+
+@media (max-width:700px){
+  .q-choices{gap:6px}
+  .q-choices button{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .q-bar i{transition:none}
+}
+</style>
+</head>
+<body>
+<nav class="topbar" aria-label="Navigation du site">
+  <div class="topbar-in">
+    <a class="brand" href="../"><span class="dot" aria-hidden="true"></span>Informatique quantique</a>
+    <div class="topnav">
+      <a href="../">Accueil</a>
+      <a href="../sources/">Sources</a>
+      <a href="./" class="is-on">Quiz</a>
+      <a href="../slides/">Slides</a>
+    </div>
+  </div>
+</nav>
+<header class="wrap hero">
+  <p class="kicker">Forum Technique 2026 · MAALSI 25-2</p>
+  <h1>Quiz : vrai ou faux ?</h1>
+  <p class="lead">9 idées reçues sur l’ordinateur quantique, dont les 6 de la présentation. Pour chacune : vrai, faux, ou ça dépend ?</p>
+</header>
+
+<main class="wrap">
+<section class="game" aria-label="Quiz">
+  <div class="quiz" id="quiz" data-n="9"><noscript><p class="q-text">Activez JavaScript pour jouer.</p></noscript></div>
+  <script type="application/json" id="quiz-data">[{"q": "L’ordinateur quantique va remplacer mon PC.", "a": "faux", "short": "Spécialisé, et accessible seulement à distance.", "exp": "Il n’est bon que pour certains calculs précis et doit fonctionner dans des conditions extrêmes, souvent près du zéro absolu. On s’en sert à distance, par Internet : IBM en prête même 10 minutes gratuites tous les 28 jours.", "src": "IBM", "url": "https://quantum.cloud.ibm.com/docs/guides/plans-overview"}, {"q": "Un qubit, c’est un bit qui vaut 0 et 1 en même temps.", "a": "nuance", "short": "C’est l’image courante, mais elle est incomplète.", "exp": "C’est l’image habituelle, mais un qubit porte deux « amplitudes » qui peuvent s’additionner ou s’annuler entre elles : c’est là toute sa force. Et quand on le mesure, on ne lit jamais qu’un seul résultat, 0 ou 1.", "src": "ScienceEtonnante (David Louapre)", "url": "https://scienceetonnante.com/blog/2017/04/07/les-ordinateurs-quantiques/"}, {"q": "Il casse déjà tous nos chiffrements.", "a": "faux", "short": "Aucune machine actuelle n’en est capable.", "exp": "Selon une estimation récente d’Alice & Bob, casser RSA-2048 demanderait 22 593 qubits de chat fonctionnant ensemble pendant environ trois jours. Aucune machine actuelle n’approche ce niveau de taille et de fiabilité.", "src": "The Quantum Insider", "url": "https://thequantuminsider.com/2026/10/29/alice-bob-22593-qubits-break-rsa-2048/"}, {"q": "Certains ordinateurs quantiques sont plus froids que l’espace.", "a": "vrai", "short": "Vers 0,01 kelvin, contre 2,7 K dans l’espace.", "exp": "Les qubits supraconducteurs de Google ou d’IBM fonctionnent vers 0,01 kelvin, soit −273,14 °C, alors que le fond de l’espace est à environ 2,7 K. C’est le rôle du fameux « lustre doré » : un réfrigérateur qui protège les qubits de la chaleur.", "src": "Futura Sciences", "url": "https://www.futura-sciences.com/tech/actualites/ordinateur-quantique-ordinateur-quantique-vraie-raison-derriere-ces-etranges-machines-forme-lustre-futuriste-130605/"}, {"q": "Il calcule tout plus vite qu’un ordinateur classique.", "a": "nuance", "short": "Seulement certains problèmes précis.", "exp": "Il n’accélère que certains problèmes : simuler des molécules et des matériaux, factoriser de grands nombres, chercher dans de grands ensembles. Pour un tableur, une vidéo ou un jeu vidéo, il n’apporte rien.", "src": "Futura Sciences", "url": "https://www.futura-sciences.com/sciences/definitions/physique-ordinateur-quantique-4348/"}, {"q": "Plus une machine a de qubits, plus elle est puissante.", "a": "nuance", "short": "La qualité compte autant que le nombre.", "exp": "Le nombre ne suffit pas : des qubits qui font trop d’erreurs ne servent à rien, d’où les qubits logiques, des qubits fiables fabriqués à partir de plusieurs qubits physiques. Par exemple, la machine Helios de Quantinuum tire 48 qubits logiques corrigés de ses 98 qubits physiques.", "src": "Quantinuum", "url": "https://quantinuum.com/blog/skinny-logic-quantum-codes-go-on-a-diet"}, {"q": "C’est la fin du Bitcoin.", "a": "nuance", "short": "Menacé à terme, mais il peut changer de cadenas.", "exp": "Ses signatures pourraient un jour être cassées par un grand ordinateur quantique, à commencer par les quelque 6,7 millions de bitcoins dont la clé publique est déjà visible. Mais le réseau peut changer de « cadenas » : des parades sont proposées, même si les développeurs n’ont pas encore tranché.", "src": "PostQuantum", "url": "https://postquantum.com/quantum-threat-crypto/bitcoin-quantum-vulnerability/"}, {"q": "Il faut agir dès maintenant.", "a": "vrai", "short": "Changer les cadenas prend des années.", "exp": "Changer les « cadenas » d’un système informatique prend des années, et des données interceptées aujourd’hui pourront être déchiffrées plus tard. L’ANSSI exigera des protections post-quantiques pour qualifier un produit dès 2027.", "src": "ANSSI", "url": "https://cyber.gouv.fr/enjeux-technologiques/cryptographie-post-quantique/faq-pqc/"}, {"q": "La France est dans la course.", "a": "vrai", "short": "Stratégie nationale depuis 2021.", "exp": "Elle a une stratégie nationale depuis 2021, renforcée en mai 2026 par un milliard d’euros supplémentaires. Ses startups comme Alice & Bob, Pasqal ou Quandela comptent parmi les acteurs reconnus du domaine.", "src": "Gouvernement", "url": "https://www.info.gouv.fr/upload/media/mixed/0001/16/ab99c9a2bb614160003116268d2e588bf0c55aa5.pdf"}]</script>
+</section>
+</main>
+
+<footer class="wrap">
+  <span><strong>Introduction à l’informatique quantique</strong> · Forum Technique 2026 · MAALSI 25-2</span>
+  <span>Résumés rédigés pour cette page.</span>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+  const root = document.getElementById("quiz");
+  const dataEl = document.getElementById("quiz-data");
+  if (!root || !dataEl) return;
+  const Q = JSON.parse(dataEl.textContent);
+  const ORDER = ["vrai", "nuance", "faux"];
+  const LABEL = { vrai: "Vrai", nuance: "Ça dépend", faux: "Faux" };
+  const ICON = { vrai: "✓", nuance: "≈", faux: "✕" };
+  const SAY = { vrai: "c’est vrai.", nuance: "ça dépend.", faux: "c’est faux." };
+  const NB = " ", NNB = " ";
+  let i = 0, score = 0, found = [];
+
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  const quote = (t) => "«" + NB + t.replace(/\.$/, "") + NB + "»";
+  const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function bringIntoView() {
+    const top = root.getBoundingClientRect().top;
+    if (top < 90 || top > window.innerHeight * 0.6) root.scrollIntoView({ block: "start", behavior: reduced() ? "auto" : "smooth" });
+  }
+  function head(progress) {
+    const top = el("div", "q-top");
+    const c = el("span"); c.append("Question ", el("b", null, String(Math.min(i + 1, Q.length))), " / " + Q.length);
+    const s = el("span"); s.append("Score" + NB + ": ", el("b", "q-pts", String(score)));
+    top.append(c, s);
+    const bar = el("div", "q-bar"); const fill = el("i"); bar.append(fill);
+    fill.style.width = (progress / Q.length * 100) + "%";
+    return [top, bar];
+  }
+  function question() {
+    const q = Q[i];
+    root.replaceChildren(...head(i));
+    root.append(el("p", "q-text", quote(q.q)));
+    const choices = el("div", "q-choices");
+    choices.setAttribute("role", "group"); choices.setAttribute("aria-label", "Votre réponse");
+    ORDER.forEach((a) => {
+      const b = el("button"); b.type = "button"; b.dataset.a = a;
+      const ic = el("span", "ic", ICON[a]); ic.setAttribute("aria-hidden", "true");
+      b.append(ic, el("span", null, LABEL[a]));
+      b.addEventListener("click", () => answer(a, choices));
+      choices.append(b);
+    });
+    const out = el("div", "q-answer"); out.hidden = true; out.setAttribute("aria-live", "polite");
+    root.append(choices, out);
+  }
+  function answer(a, choices) {
+    const q = Q[i];
+    const ok = a === q.a;
+    const near = !ok && (a === "nuance" || q.a === "nuance");
+    if (ok) score++;
+    found.push(ok);
+    choices.querySelectorAll("button").forEach((b) => {
+      b.disabled = true;
+      if (b.dataset.a === q.a) b.classList.add("is-right");
+      else if (b.dataset.a === a) b.classList.add("is-wrong");
+      else b.classList.add("is-dim");
+    });
+    root.querySelector(".q-pts").textContent = String(score);
+    root.querySelector(".q-bar i").style.width = ((i + 1) / Q.length * 100) + "%";
+    const out = root.querySelector(".q-answer");
+    const v = el("p", "q-verdict " + (ok ? "ok" : near ? "near" : "ko"),
+      (ok ? "Bien vu, " : near ? "Presque" + NB + ": " : "Raté" + NB + ": ") + SAY[q.a]);
+    const exp = el("p", "q-exp", q.exp);
+    const src = el("a", "q-src", "Source" + NB + ": " + q.src + " ↗");
+    src.href = q.url; src.target = "_blank"; src.rel = "noopener";
+    const last = i === Q.length - 1;
+    const next = el("button", "btn primary q-next", last ? "Voir mon score" : "Question suivante");
+    next.type = "button";
+    next.addEventListener("click", () => {
+      i++;
+      if (last) end(); else question();
+      bringIntoView();
+      const f = root.querySelector(".q-choices button, .q-again");
+      if (f) f.focus({ preventScroll: true });
+    });
+    out.replaceChildren(v, exp, src, next);
+    out.hidden = false;
+    next.focus({ preventScroll: true });
+  }
+  function end() {
+    root.replaceChildren(...head(Q.length));
+    root.querySelector(".q-top span").textContent = "Terminé";
+    const s = el("p", "q-score"); s.append(String(score), el("span", null, " / " + Q.length));
+    const r = score / Q.length;
+    const msg = score === Q.length ? "Sans faute" + NNB + "! Vous pourriez faire la présentation à notre place."
+      : r >= 0.75 ? "Très bien" + NB + ": les idées reçues ne vous résistent pas."
+      : r >= 0.4 ? "Pas mal" + NNB + "! Relisez les explications, elles valent le détour."
+      : "Les idées reçues ont la vie dure" + NB + ": c’est tout le sujet de la présentation.";
+    root.append(s, el("p", "q-msg", msg));
+    const ol = el("ol", "recap");
+    Q.forEach((q, k) => {
+      const li = el("li");
+      const ic = el("span", "ic r-" + q.a, ICON[q.a]); ic.setAttribute("aria-hidden", "true");
+      const txt = el("div");
+      txt.append(el("b", null, quote(q.q)), el("small", null, LABEL[q.a] + NB + ": " + q.short));
+      li.append(ic, txt, el("span", "you " + (found[k] ? "ok" : "ko"), found[k] ? "Trouvé" : "Raté"));
+      ol.append(li);
+    });
+    const cta = el("div", "cta");
+    const again = el("button", "btn primary q-again", "Rejouer"); again.type = "button";
+    again.addEventListener("click", () => {
+      i = 0; score = 0; found = [];
+      question(); bringIntoView();
+      root.querySelector(".q-choices button").focus({ preventScroll: true });
+    });
+    const slides = el("a", "btn", "Revoir la slide des mythes"); slides.href = "../slides/#18";
+    cta.append(again, slides);
+    root.append(ol, cta);
+  }
+  question();
+})();
+</script>
+</body>
+</html>

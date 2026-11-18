@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Informatique quantique : sources et ressources</title>
-<meta name="description" content="Les 38 sources de la présentation « Introduction à l’informatique quantique » résumées en deux phrases, un vrai ou faux en 9 questions, un glossaire et les slides. Forum Technique 2026, MAALSI 25-2.">
+<title>Informatique quantique</title>
+<meta name="description" content="Introduction à l’informatique quantique : les sources de la présentation classées par chapitre, un quiz vrai ou faux, et les slides. Forum Technique 2026, MAALSI 25-2.">
 <meta name="theme-color" content="#060a22">
 <link rel="canonical" href="https://quantique.romainmurier.com/">
 <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -13,22 +13,20 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Introduction à l’informatique quantique">
-<meta property="og:title" content="Informatique quantique : sources, jeu et glossaire">
-<meta property="og:description" content="38 sources résumées en deux phrases, un vrai ou faux en 9 questions, un glossaire et les slides de la présentation. Forum Technique 2026, MAALSI 25-2.">
+<meta property="og:title" content="Informatique quantique : sources, quiz et slides">
+<meta property="og:description" content="Les sources de la présentation classées par chapitre, un quiz vrai ou faux, et les slides. Forum Technique 2026, MAALSI 25-2.">
 <meta property="og:url" content="https://quantique.romainmurier.com/">
 <meta property="og:image" content="https://quantique.romainmurier.com/og.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Informatique quantique : sources, jeu vrai ou faux, glossaire et slides. Forum Technique 2026, MAALSI 25-2.">
+<meta property="og:image:alt" content="Informatique quantique : sources, quiz vrai ou faux et slides. Forum Technique 2026, MAALSI 25-2.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Même univers que le diaporama du forum : nuit profonde, dégradé bleu → violet → magenta. Une couleur par type de source. */
-  /* Mise en page : téléphone d'abord (on arrive par QR code) ; une colonne de fiches, deux sur grand écran ; sommaire collant en haut. */
   --bg:#060a22;
   --surface:rgba(255,255,255,.05);
   --surface-hi:rgba(255,255,255,.085);
@@ -37,29 +35,22 @@
   --muted:#a8b1df;
   --faint:#7079b3;
   --grad:linear-gradient(110deg,#1fa2ff,#7b3fe4 55%,#b02fe0);
-  --c-video:#e08cff;
-  --c-podcast:#b49bff;
-  --c-officiel:#3ee0a1;
-  --c-article:#5fd6ff;
-  --c-cours:#ffb547;
-  --ok:#3ee0a1;
-  --warn:#ffb547;
-  --bad:#ff5d7a;
   --display:"Exo 2","Trebuchet MS",sans-serif;
   --body:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:176px}
+html,body{min-height:100%}
 body{
   background:radial-gradient(ellipse at 0% 0%,#1a2370 0%,transparent 50%),radial-gradient(ellipse at 100% 60%,#2c1063 0%,transparent 45%),var(--bg);
   background-color:var(--bg);
   color:var(--text);font-family:var(--body);line-height:1.55;font-size:16px;
+  display:flex;flex-direction:column;
 }
 a{color:inherit}
-.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,40px);width:100%}
 
-/* Barre de navigation du site (commune aux 3 pages) */
+/* Barre de navigation du site (commune aux pages) */
 .topbar{position:sticky;top:0;z-index:30;background:rgba(6,10,34,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .topbar-in{max-width:1080px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:56px}
 .brand{display:flex;align-items:center;gap:8px;font-family:var(--display);font-style:italic;font-weight:800;font-size:14.5px;letter-spacing:.3px;text-decoration:none;color:var(--text);white-space:nowrap;flex:none}
@@ -71,146 +62,28 @@ a{color:inherit}
 .topnav a.is-on{color:var(--text);background:rgba(255,255,255,.1);border:1px solid var(--line)}
 .topnav a:focus-visible,.brand:focus-visible{outline:3px solid #5fd6ff;outline-offset:2px}
 
-#toTop{position:fixed;right:18px;bottom:18px;z-index:25;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--text);font-size:18px;cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s,transform .25s,background .15s;backdrop-filter:blur(8px)}
-#toTop.show{opacity:1;visibility:visible;transform:none}
-#toTop:hover{background:rgba(255,255,255,.16)}
-#toTop:focus-visible{outline:3px solid #5fd6ff;outline-offset:2px}
-
 /* En-tête */
-.hero{padding-top:clamp(28px,6vw,56px);padding-bottom:18px}
+main{flex:1;display:flex;align-items:center;padding:clamp(28px,6vw,40px) 0}
+.hero{width:100%}
 .kicker{font-family:var(--display);font-style:italic;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-h1{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(30px,6vw,54px);line-height:1.02;margin-top:8px;text-wrap:balance;max-width:16ch}
-.lead{margin-top:14px;color:var(--muted);font-size:clamp(16px,1.9vw,18.5px);max-width:60ch}
-.facts{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;font-size:13.5px;color:var(--faint);font-variant-numeric:tabular-nums}
-.facts b{color:var(--text);font-weight:600}
+h1{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(32px,7vw,60px);line-height:1.02;margin-top:10px;text-wrap:balance;max-width:18ch}
+.lead{margin-top:16px;color:var(--muted);font-size:clamp(16px,1.9vw,19px);max-width:60ch}
 
-/* Boutons d'en-tête */
-.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 18px;border-radius:999px;font:600 15px/1.2 var(--body);text-decoration:none;color:var(--text);border:1px solid var(--line);background:var(--surface);cursor:pointer}
-.btn svg{flex:none}
-.btn:hover{border-color:rgba(95,214,255,.5);background:var(--surface-hi)}
-.btn.primary{background:var(--grad);border-color:transparent;color:#fff}
-.btn.primary:hover{filter:brightness(1.12)}
-.btn:focus-visible{outline:3px solid #5fd6ff;outline-offset:2px}
+/* Cartes d'accès aux 3 sections */
+.hub{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(28px,5vw,40px)}
+.hub a{display:flex;flex-direction:column;gap:10px;height:100%;text-decoration:none;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;transition:background .2s,border-color .2s,transform .15s}
+.hub a:hover{background:var(--surface-hi);border-color:rgba(95,214,255,.45);transform:translateY(-2px)}
+.hub a:focus-visible{outline:3px solid #5fd6ff;outline-offset:2px}
+.hub .num{font-family:var(--display);font-style:italic;font-weight:800;font-size:30px;line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hub h2{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:17.5px}
+.hub p{color:var(--muted);font-size:14.5px;line-height:1.5}
+.hub .go{margin-top:auto;padding-top:8px;font-size:13px;font-weight:700;color:#5fd6ff}
 
-/* Pour commencer */
-.start{margin:22px 0 8px}
-.start h2{font-family:var(--display);font-style:italic;font-weight:800;font-size:20px;margin-bottom:12px}
-.start .list{grid-template-columns:repeat(3,minmax(0,1fr))}
-.src.feat .card{background:linear-gradient(#121944,#121944) padding-box,var(--grad) border-box;border:1px solid transparent}
-.src.feat .card:hover{background:linear-gradient(#182057,#182057) padding-box,var(--grad) border-box}
-
-/* Sommaire collant */
-.toc{position:sticky;top:56px;z-index:20;background:rgba(6,10,34,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:20px}
-.toc .wrap{display:flex;flex-direction:column;gap:8px;padding-top:10px;padding-bottom:10px}
-.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
-.chips::-webkit-scrollbar{display:none}
-.chips.more{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
-.chips a,.chips button{flex:none;font:500 13.5px/1 var(--body);color:var(--muted);text-decoration:none;white-space:nowrap;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
-.chips a b{font-family:var(--display);font-style:italic;font-weight:800;color:var(--text);margin-right:2px}
-.chips a:hover,.chips button:hover{color:var(--text);border-color:rgba(95,214,255,.5)}
-.chips a:focus-visible,.chips button:focus-visible,.card:focus-visible{outline:3px solid #5fd6ff;outline-offset:2px}
-.filters button[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
-.filters .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
-
-/* Chapitres */
-.chapter{padding:34px 0 6px}
-.ch-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px}
-.num{font-family:var(--display);font-style:italic;font-weight:800;font-size:clamp(34px,5vw,46px);line-height:.95;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;min-width:1.5em;font-variant-numeric:tabular-nums}
-.ch-head h2{font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:clamp(20px,2.8vw,27px);line-height:1.1;text-wrap:balance}
-.ch-head p{color:var(--muted);margin-top:4px;max-width:60ch}
-
-.list{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{display:flex;flex-direction:column;gap:6px;height:100%;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;transition:background .2s,border-color .2s,transform .15s}
-.card:hover{background:var(--surface-hi);border-color:rgba(95,214,255,.45);transform:translateY(-1px)}
-.meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:12.5px;color:var(--faint);font-variant-numeric:tabular-nums}
-.pill{font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid currentColor}
-.t-video{color:var(--c-video)}
-.t-podcast{color:var(--c-podcast)}
-.t-officiel{color:var(--c-officiel)}
-.t-article{color:var(--c-article)}
-.t-cours{color:var(--c-cours)}
-.lang{font-weight:700;color:var(--muted)}
-.hint{font-style:italic}
-.via{font-weight:600;color:#1ed760}
-.card h3{overflow-wrap:anywhere;font-size:16.5px;font-weight:600;line-height:1.3;text-wrap:balance}
-.card h3::after{content:" ↗";color:var(--faint);font-weight:500}
-.from{font-size:13.5px;color:var(--muted);font-weight:500}
-.sum{font-size:14.5px;color:#c9cff0;line-height:1.55}
-
-/* Jeu : vrai ou faux */
-.game,.glossary{padding:34px 0 6px}
-.quiz{max-width:760px;border-radius:20px;padding:clamp(18px,3vw,28px);background:linear-gradient(#0f1640,#0f1640) padding-box,var(--grad) border-box;border:1px solid transparent}
-.q-top{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;color:var(--faint);font-variant-numeric:tabular-nums}
-.q-top b{color:var(--text);font-weight:600}
-.q-bar{height:4px;border-radius:4px;background:rgba(255,255,255,.08);margin:10px 0 18px;overflow:hidden}
-.q-bar i{display:block;height:100%;width:0;background:var(--grad);transition:width .3s}
-.q-text{font-family:var(--display);font-style:italic;font-weight:700;font-size:clamp(21px,3.4vw,28px);line-height:1.22;text-wrap:balance}
-.q-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:20px}
-.q-choices button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:58px;padding:8px 6px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--text);font:600 15px/1.15 var(--body);cursor:pointer;transition:background .15s,border-color .15s,opacity .15s}
-.q-choices .ic{font-size:19px;line-height:1;font-weight:700}
-.q-choices [data-a="vrai"] .ic{color:var(--ok)}
-.q-choices [data-a="nuance"] .ic{color:var(--warn)}
-.q-choices [data-a="faux"] .ic{color:var(--bad)}
-.q-choices button:hover:not(:disabled){border-color:rgba(95,214,255,.55);background:var(--surface-hi)}
-.q-choices button:focus-visible{outline:3px solid #5fd6ff;outline-offset:2px}
-.q-choices button:disabled{cursor:default}
-.q-choices button.is-right{border-color:var(--ok);background:rgba(62,224,161,.15)}
-.q-choices button.is-wrong{border-color:var(--bad);background:rgba(255,93,122,.15)}
-.q-choices button.is-dim{opacity:.4}
-.q-answer{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
-.q-verdict{font-weight:700;font-size:17px}
-.q-verdict.ok{color:var(--ok)}
-.q-verdict.near{color:var(--warn)}
-.q-verdict.ko{color:var(--bad)}
-.q-exp{margin-top:6px;color:#c9cff0;font-size:15px;line-height:1.55}
-.q-src{display:inline-block;margin-top:8px;font-size:13.5px;color:var(--muted);text-underline-offset:3px}
-.q-src:hover{color:var(--text)}
-.quiz .q-next{margin-top:16px;width:100%}
-.q-score{font-family:var(--display);font-style:italic;font-weight:800;font-size:clamp(44px,8vw,64px);line-height:1;font-variant-numeric:tabular-nums}
-.q-score span{font-size:.5em;color:var(--muted)}
-.q-msg{margin-top:8px;font-size:17px;font-weight:600}
-.recap{list-style:none;margin-top:18px;display:grid;gap:8px}
-.recap li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line)}
-.recap .ic{font-weight:800;font-size:18px;line-height:1.3;text-align:center}
-.recap .r-vrai{color:var(--ok)}
-.recap .r-nuance{color:var(--warn)}
-.recap .r-faux{color:var(--bad)}
-.recap b{display:block;font-weight:600;font-size:15px;line-height:1.35}
-.recap small{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
-.recap .you{font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
-.recap .you.ok{color:var(--ok)}
-.recap .you.ko{color:var(--faint)}
-.quiz .cta{margin-top:18px}
-
-/* Glossaire */
-.g-group{font:700 12.5px/1.2 var(--body);letter-spacing:1.6px;text-transform:uppercase;color:var(--faint);margin:22px 0 10px}
-.ch-head + .g-group{margin-top:4px}
-.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.term{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
-.term dt{font-weight:700;font-size:16px;line-height:1.3;margin-bottom:4px}
-.term dd{font-size:14.5px;color:#c9cff0;line-height:1.55}
-
-.empty{display:none;color:var(--muted);padding:30px 0;text-align:center}
-.is-empty{display:none}
-
-footer{margin:40px auto 32px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--faint)}
+footer{margin-top:auto;padding:22px clamp(16px,4vw,40px) 26px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--faint);max-width:1080px;width:100%;margin-left:auto;margin-right:auto}
 footer strong{color:var(--muted);font-weight:600}
 
-@media (max-width:900px){
-  .start .list{grid-template-columns:1fr}
-}
-@media (max-width:700px){
-  .list,.gloss{grid-template-columns:1fr}
-  .ch-head{gap:12px}
-  .q-choices{gap:6px}
-  .q-choices button{font-size:14px}
-}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .card,.q-choices button,.q-bar i{transition:none}
-  .card:hover{transform:none}
-  #toTop{transition:opacity .15s}
+@media (max-width:800px){
+  .hub{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -220,263 +93,30 @@ footer strong{color:var(--muted);font-weight:600}
     <a class="brand" href="./"><span class="dot" aria-hidden="true"></span>Informatique quantique</a>
     <div class="topnav">
       <a href="./" class="is-on">Accueil</a>
-      <a href="#ch1">Sources</a>
-      <a href="#jeu">Quiz</a>
-      <a href="jeu/">Défi</a>
-      <a href="#glossaire">Glossaire</a>
+      <a href="sources/">Sources</a>
+      <a href="quiz/">Quiz</a>
       <a href="slides/">Slides</a>
-    </div>
-  </div>
-</nav>
-<header class="wrap hero">
-  <p class="kicker">Forum Technique 2026 · MAALSI 25-2</p>
-  <h1>Informatique quantique : sources et ressources</h1>
-  <p class="lead">Toutes les sources de la présentation, classées par chapitre et résumées en deux phrases, une sélection de vidéos et de podcasts pour aller plus loin, un quiz et un défi, et un glossaire.</p>
-  <p class="facts"><span><b>38</b> sources</span><span><b>6</b> chapitres + aller plus loin</span><span>FR = en français · EN = en anglais</span><span>Relevées le 18 novembre 2026</span></p>
-  <div class="cta">
-    <a class="btn primary" href="#start">Découvrir plus <span aria-hidden="true">↓</span></a>
-  </div>
-
-  <section class="start" id="start" aria-labelledby="start-t">
-    <h2 id="start-t">Pour commencer : 3 liens</h2>
-    <ol class="list">
-<li class="src feat" data-type="video"><a class="card" href="https://www.youtube.com/results?search_query=Dr+Nozman+Voici+un+vrai+ordinateur+quantique" target="_blank" rel="noopener"><div class="meta"><span class="pill t-video">Vidéo</span><span class="lang">FR</span><span>2023 · 16 min</span><span class="hint">recherche YouTube</span></div><h3>Voici un vrai ordinateur quantique (c’est dingue)</h3><p class="from">Dr Nozman, chez Alice &amp; Bob</p><p class="sum">Le vulgarisateur visite les laboratoires d’Alice &amp; Bob à Paris pour voir un ordinateur quantique en vrai : une puce d’environ un centimètre au bout d’un énorme réfrigérateur. Il explique aussi pourquoi on n’aura sans doute jamais d’ordinateur quantique sur son bureau.</p></a></li>
-<li class="src feat" data-type="podcast"><a class="card" href="https://open.spotify.com/search/Underscore%20Martin%20Bruder%20informatique%20quantique/episodes" target="_blank" rel="noopener"><div class="meta"><span class="pill t-podcast">Podcast</span><span class="lang">FR</span><span>Mai 2024 · 1 h</span><span class="via">Spotify</span></div><h3>Vous allez ENFIN comprendre l’informatique quantique</h3><p class="from">Underscore_ (Micode), avec Martin Bruder</p><p class="sum">Martin Bruder, ancien enseignant à l’université Carnegie-Mellon, explique pas à pas d’où vient la puissance du calcul quantique, à partir d’un petit algorithme, celui de Deutsch. L’épisode précise aussi ce que le quantique ne changera pas, comme les jeux vidéo ou l’IA.</p></a></li>
-<li class="src feat" data-type="video"><a class="card" href="https://www.youtube.com/watch?v=RQWpF2Gb-gU" target="_blank" rel="noopener"><div class="meta"><span class="pill t-video">Vidéo</span><span class="lang">EN</span><span>Avril 2025 · 37 min</span></div><h3>But what is quantum computing? (Grover’s Algorithm)</h3><p class="from">3Blue1Brown</p><p class="sum">Grant Sanderson démonte l’idée qu’un ordinateur quantique « essaie toutes les réponses en même temps » et montre le vrai mécanisme, l’interférence, avec l’algorithme de Grover. Très visuel, en anglais avec sous-titres.</p></a></li>
-    </ol>
-  </section>
-</header>
-
-<nav class="toc" aria-label="Chapitres et filtres">
-  <div class="wrap">
-    <div class="chips" aria-label="Chapitres"><a href="#jeu"><b>?</b> Quiz : vrai ou faux</a><a href="#ch1"><b>01</b> Physique quantique &amp; qubit</a><a href="#ch2"><b>02</b> Les 4 principes en exemples</a><a href="#ch3"><b>03</b> Histoire &amp; état des lieux</a><a href="#ch4"><b>04</b> Impact : sécurité &amp; IA</a><a href="#ch5"><b>05</b> Impact : vie quotidienne</a><a href="#ch6"><b>06</b> Mythes, limites &amp; à retenir</a><a href="#glossaire"><b>Aa</b> Glossaire</a><a href="#plus"><b>+</b> Aller plus loin</a><a href="jeu/"><b>PF</b> Défi quantique</a></div>
-    <div class="chips filters" role="group" aria-label="Filtrer par type">
-      <button type="button" data-filter="all" aria-pressed="true">Tout</button>
-      <button type="button" data-filter="video" aria-pressed="false"><span class="dot" style="background:var(--c-video)"></span>Vidéos</button>
-      <button type="button" data-filter="podcast" aria-pressed="false"><span class="dot" style="background:var(--c-podcast)"></span>Podcasts</button>
-      <button type="button" data-filter="officiel" aria-pressed="false"><span class="dot" style="background:var(--c-officiel)"></span>Sources officielles</button>
-      <button type="button" data-filter="article" aria-pressed="false"><span class="dot" style="background:var(--c-article)"></span>Articles et études</button>
-      <button type="button" data-filter="cours" aria-pressed="false"><span class="dot" style="background:var(--c-cours)"></span>Cours et outils</button>
     </div>
   </div>
 </nav>
 
 <main class="wrap">
-<section class="game" id="jeu" aria-labelledby="jeu-t"><div class="ch-head"><span class="num" aria-hidden="true">?</span><div><h2 id="jeu-t">Quiz : vrai ou faux ?</h2><p>9 idées reçues sur l’ordinateur quantique, dont les 6 de la présentation. Pour chacune : vrai, faux, ou ça dépend ?</p></div></div><div class="quiz" id="quiz" data-n="9"><noscript><p class="q-text">Activez JavaScript pour jouer.</p></noscript></div><script type="application/json" id="quiz-data">[{"q": "L’ordinateur quantique va remplacer mon PC.", "a": "faux", "short": "Spécialisé, et accessible seulement à distance.", "exp": "Il n’est bon que pour certains calculs précis et doit fonctionner dans des conditions extrêmes, souvent près du zéro absolu. On s’en sert à distance, par Internet : IBM en prête même 10 minutes gratuites tous les 28 jours.", "src": "IBM", "url": "https://quantum.cloud.ibm.com/docs/guides/plans-overview"}, {"q": "Un qubit, c’est un bit qui vaut 0 et 1 en même temps.", "a": "nuance", "short": "C’est l’image courante, mais elle est incomplète.", "exp": "C’est l’image habituelle, mais un qubit porte deux « amplitudes » qui peuvent s’additionner ou s’annuler entre elles : c’est là toute sa force. Et quand on le mesure, on ne lit jamais qu’un seul résultat, 0 ou 1.", "src": "ScienceEtonnante (David Louapre)", "url": "https://scienceetonnante.com/blog/2017/04/07/les-ordinateurs-quantiques/"}, {"q": "Il casse déjà tous nos chiffrements.", "a": "faux", "short": "Aucune machine actuelle n’en est capable.", "exp": "Selon une estimation récente d’Alice & Bob, casser RSA-2048 demanderait 22 593 qubits de chat fonctionnant ensemble pendant environ trois jours. Aucune machine actuelle n’approche ce niveau de taille et de fiabilité.", "src": "The Quantum Insider", "url": "https://thequantuminsider.com/2026/10/29/alice-bob-22593-qubits-break-rsa-2048/"}, {"q": "Certains ordinateurs quantiques sont plus froids que l’espace.", "a": "vrai", "short": "Vers 0,01 kelvin, contre 2,7 K dans l’espace.", "exp": "Les qubits supraconducteurs de Google ou d’IBM fonctionnent vers 0,01 kelvin, soit −273,14 °C, alors que le fond de l’espace est à environ 2,7 K. C’est le rôle du fameux « lustre doré » : un réfrigérateur qui protège les qubits de la chaleur.", "src": "Futura Sciences", "url": "https://www.futura-sciences.com/tech/actualites/ordinateur-quantique-ordinateur-quantique-vraie-raison-derriere-ces-etranges-machines-forme-lustre-futuriste-130605/"}, {"q": "Il calcule tout plus vite qu’un ordinateur classique.", "a": "nuance", "short": "Seulement certains problèmes précis.", "exp": "Il n’accélère que certains problèmes : simuler des molécules et des matériaux, factoriser de grands nombres, chercher dans de grands ensembles. Pour un tableur, une vidéo ou un jeu vidéo, il n’apporte rien.", "src": "Futura Sciences", "url": "https://www.futura-sciences.com/sciences/definitions/physique-ordinateur-quantique-4348/"}, {"q": "Plus une machine a de qubits, plus elle est puissante.", "a": "nuance", "short": "La qualité compte autant que le nombre.", "exp": "Le nombre ne suffit pas : des qubits qui font trop d’erreurs ne servent à rien, d’où les qubits logiques, des qubits fiables fabriqués à partir de plusieurs qubits physiques. Par exemple, la machine Helios de Quantinuum tire 48 qubits logiques corrigés de ses 98 qubits physiques.", "src": "Quantinuum", "url": "https://quantinuum.com/blog/skinny-logic-quantum-codes-go-on-a-diet"}, {"q": "C’est la fin du Bitcoin.", "a": "nuance", "short": "Menacé à terme, mais il peut changer de cadenas.", "exp": "Ses signatures pourraient un jour être cassées par un grand ordinateur quantique, à commencer par les quelque 6,7 millions de bitcoins dont la clé publique est déjà visible. Mais le réseau peut changer de « cadenas » : des parades sont proposées, même si les développeurs n’ont pas encore tranché.", "src": "PostQuantum", "url": "https://postquantum.com/quantum-threat-crypto/bitcoin-quantum-vulnerability/"}, {"q": "Il faut agir dès maintenant.", "a": "vrai", "short": "Changer les cadenas prend des années.", "exp": "Changer les « cadenas » d’un système informatique prend des années, et des données interceptées aujourd’hui pourront être déchiffrées plus tard. L’ANSSI exigera des protections post-quantiques pour qualifier un produit dès 2027.", "src": "ANSSI", "url": "https://cyber.gouv.fr/enjeux-technologiques/cryptographie-post-quantique/faq-pqc/"}, {"q": "La France est dans la course.", "a": "vrai", "short": "Stratégie nationale depuis 2021.", "exp": "Elle a une stratégie nationale depuis 2021, renforcée en mai 2026 par un milliard d’euros supplémentaires. Ses startups comme Alice & Bob, Pasqal ou Quandela comptent parmi les acteurs reconnus du domaine.", "src": "Gouvernement", "url": "https://www.info.gouv.fr/upload/media/mixed/0001/16/ab99c9a2bb614160003116268d2e588bf0c55aa5.pdf"}]</script></section>
-<section class="chapter" id="ch1" aria-labelledby="ch1-t"><div class="ch-head"><span class="num" aria-hidden="true">01</span><div><h2 id="ch1-t">Physique quantique &amp; qubit</h2><p>Ce qu’est un qubit, et pourquoi un Français a reçu le Nobel de physique 2025.</p></div></div><ol class="list">
-<li class="src" data-type="article"><a class="card" href="https://www.futura-sciences.com/sciences/definitions/physique-ordinateur-quantique-4348/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">FR</span><span>Oct. 2024</span></div><h3>Ordinateur quantique : qu’est-ce que c’est ?</h3><p class="from">Futura Sciences</p><p class="sum">Une définition simple de l’ordinateur quantique et du qubit, comparé aux bits 0 ou 1 d’un ordinateur classique. L’article explique aussi pourquoi il faut un très grand nombre de qubits pour battre un ordinateur classique, et pourquoi c’est si difficile.</p></a></li>
-<li class="src" data-type="officiel"><a class="card" href="https://www.education.gouv.fr/le-prix-nobel-de-physique-2025-consacre-michel-h-devoret-pour-ses-travaux-en-mecanique-quantique-463152" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">FR</span><span>Oct. 2025</span></div><h3>Le prix Nobel de physique 2025 consacre Michel H. Devoret</h3><p class="from">Ministère de l’Éducation nationale</p><p class="sum">Le ministère salue le Nobel du physicien français pour ses travaux sur les circuits supraconducteurs, qui ouvrent la voie aux ordinateurs quantiques. Il rappelle que Michel Devoret est le 18e Français lauréat du Nobel de physique et qu’il a enseigné au Collège de France.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://www.inp.cnrs.fr/en/cnrsinfo/nobel-prize-physics-2025-quantum-properties-human-scale" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">EN</span><span>Oct. 2025</span></div><h3>Nobel Prize in Physics 2025: quantum properties on a human scale</h3><p class="from">CNRS Physique</p><p class="sum">Le CNRS explique la découverte récompensée : un comportement quantique, l’effet tunnel, observé en 1984-1985 dans un circuit électrique assez grand pour être vu. Il retrace aussi le parcours de Michel Devoret, qui a fait sa thèse à Orsay.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://www.maddyness.com/2025/10/08/nobel-de-physique-2025-deux-laureats-membres-dalice-bob/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">FR</span><span>Oct. 2025</span></div><h3>Nobel de physique 2025 : deux lauréats membres d’Alice &amp; Bob</h3><p class="from">Maddyness</p><p class="sum">Michel Devoret a longtemps été conseiller scientifique de la startup parisienne, et John Martinis siège à son comité consultatif. Le cofondateur Théau Peronnin explique ce que ce prix récompense vraiment, au-delà des qubits.</p></a></li>
-</ol></section>
-<section class="chapter" id="ch2" aria-labelledby="ch2-t"><div class="ch-head"><span class="num" aria-hidden="true">02</span><div><h2 id="ch2-t">Les 4 principes en exemples</h2><p>Superposition, intrication, interférence, décohérence : les voir à l’œuvre.</p></div></div><ol class="list">
-<li class="src" data-type="video"><a class="card" href="https://www.espace-sciences.org/conferences/des-concepts-aux-applications-les-deux-revolutions-quantiques" target="_blank" rel="noopener"><div class="meta"><span class="pill t-video">Vidéo</span><span class="lang">FR</span><span>Conférence</span></div><h3>Des concepts aux applications : les deux révolutions quantiques</h3><p class="from">Alain Aspect, Espace des sciences</p><p class="sum">Le prix Nobel 2022 raconte la première révolution quantique, celle du transistor et du laser, puis la seconde, fondée sur l’intrication. Une conférence grand public par celui qui a montré en 1982, à Orsay, que l’intrication est bien réelle.</p></a></li>
-<li class="src" data-type="video"><a class="card" href="https://scienceetonnante.com/blog/2017/04/07/les-ordinateurs-quantiques/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-video">Vidéo</span><span class="lang">FR</span><span>2017 · 15 min</span></div><h3>Les ordinateurs quantiques</h3><p class="from">ScienceEtonnante (David Louapre)</p><p class="sum">David Louapre répond en un quart d’heure à trois questions : qu’est-ce qu’un ordinateur quantique, comment ça marche, et saura-t-on vraiment en fabriquer un. La vidéo date de 2017 : les principes restent justes, mais les machines ont beaucoup progressé depuis.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://www.futura-sciences.com/tech/actualites/ordinateur-quantique-ordinateur-quantique-vraie-raison-derriere-ces-etranges-machines-forme-lustre-futuriste-130605/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">FR</span><span>Article</span></div><h3>La vraie raison derrière ces étranges machines en forme de lustre</h3><p class="from">Futura Sciences</p><p class="sum">L’article explique pourquoi les ordinateurs quantiques ressemblent à des lustres dorés couverts de câbles. La réponse tient en un mot : la température, qu’il faut garder au plus bas pour protéger les qubits.</p></a></li>
-<li class="src" data-type="cours"><a class="card" href="https://algassert.com/quirk" target="_blank" rel="noopener"><div class="meta"><span class="pill t-cours">Outil</span><span class="lang">EN</span><span>Gratuit</span></div><h3>Quirk, simulateur de circuits quantiques</h3><p class="from">Craig Gidney</p><p class="sum">Un simulateur dans le navigateur : on glisse des portes quantiques sur des fils et on voit les amplitudes changer en direct. Placez deux portes H à la suite sur un même qubit : il revient à 0 à coup sûr, c’est l’interférence.</p></a></li>
-</ol></section>
-<section class="chapter" id="ch3" aria-labelledby="ch3-t"><div class="ch-head"><span class="num" aria-hidden="true">03</span><div><h2 id="ch3-t">Histoire &amp; état des lieux</h2><p>De Sycamore en 2019 aux qubits logiques de 2026 : les annonces, et ce qu’elles valent.</p></div></div><ol class="list">
-<li class="src" data-type="article"><a class="card" href="https://arxiv.org/abs/2111.03011" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Étude</span><span class="lang">EN</span><span>2021</span></div><h3>Solving the sampling problem of the Sycamore quantum circuits</h3><p class="from">Pan, Chen et Zhang, arXiv</p><p class="sum">Des chercheurs chinois refont en 15 heures, sur 512 cartes graphiques, la tâche que Sycamore de Google présentait en 2019 comme hors de portée. La preuve que l’avantage quantique est une course où le classique progresse aussi.</p></a></li>
-<li class="src" data-type="officiel"><a class="card" href="https://blogs.microsoft.com/blog/2024/09/10/microsoft-announces-the-best-performing-logical-qubits-on-record-and-will-provide-priority-access-to-reliable-quantum-hardware-in-azure-quantum/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">EN</span><span>Sept. 2024</span></div><h3>Microsoft and Quantinuum: the best performing logical qubits on record</h3><p class="from">Microsoft</p><p class="sum">Microsoft et Quantinuum créent et intriquent 12 qubits logiques sur une machine de 56 qubits physiques, un record à l’époque. Leurs circuits font 22 fois moins d’erreurs qu’avec les qubits physiques seuls.</p></a></li>
-<li class="src" data-type="officiel"><a class="card" href="https://blog.google/technology/research/google-willow-quantum-chip/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">EN</span><span>Déc. 2024</span></div><h3>Meet Willow, our state-of-the-art quantum chip</h3><p class="from">Google</p><p class="sum">Google présente sa puce de 105 qubits et la première preuve que plus on ajoute de qubits, moins il y a d’erreurs. Le billet annonce aussi un calcul de 5 minutes qui prendrait 10^25 ans à un supercalculateur, un chiffre discuté depuis.</p></a></li>
-<li class="src" data-type="officiel"><a class="card" href="https://blog.google/innovation-and-ai/technology/research/quantum-echoes-willow-verifiable-quantum-advantage/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">EN</span><span>Oct. 2025</span></div><h3>Quantum Echoes: verifiable quantum advantage on Willow</h3><p class="from">Google</p><p class="sum">Google fait tourner sur Willow un algorithme 13 000 fois plus rapide que le meilleur supercalculateur, avec un résultat que l’on peut vérifier. Il s’en sert pour mesurer la structure de molécules, un premier pas vers la chimie.</p></a></li>
-<li class="src" data-type="officiel"><a class="card" href="https://quantinuum.com/blog/skinny-logic-quantum-codes-go-on-a-diet" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">EN</span><span>2025-2026</span></div><h3>Skinny Logic: quantum codes go on a diet</h3><p class="from">Quantinuum</p><p class="sum">Quantinuum obtient 48 qubits logiques corrigés et 94 qubits logiques à détection d’erreurs sur les 98 qubits de sa machine Helios. Ces qubits fiables font 10 à 100 fois moins d’erreurs que les qubits physiques.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://thequantuminsider.com/2025/06/10/ibm-offers-roadmap-toward-large-scale-fault-tolerant-quantum-computer/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">EN</span><span>Juin 2025</span></div><h3>IBM offers roadmap toward a large-scale, fault-tolerant quantum computer</h3><p class="from">The Quantum Insider</p><p class="sum">IBM annonce Starling pour 2029 : 200 qubits logiques capables de 100 millions d’opérations, dans un nouveau centre à Poughkeepsie, près de New York. Suivra Blue Jay, visé à 2 000 qubits logiques et un milliard d’opérations.</p></a></li>
-<li class="src" data-type="officiel"><a class="card" href="https://newsroom.ibm.com/2026-07-30-ibm-and-algorithmiq-demonstrate-quantum-advantage,-establishing-a-framework-for-trusted-quantum-computation-beyond-classical-verification" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">EN</span><span>Juil. 2026</span></div><h3>IBM and Algorithmiq demonstrate quantum advantage</h3><p class="from">IBM Newsroom</p><p class="sum">IBM et la startup Algorithmiq annoncent une démonstration d’avantage quantique et proposent une méthode pour faire confiance à un calcul qu’un ordinateur classique ne peut plus vérifier. Comme toute annonce de ce type, le résultat est encore examiné par la communauté scientifique.</p></a></li>
-</ol></section>
-<section class="chapter" id="ch4" aria-labelledby="ch4-t"><div class="ch-head"><span class="num" aria-hidden="true">04</span><div><h2 id="ch4-t">Impact : sécurité &amp; IA</h2><p>Pourquoi nos cadenas numériques doivent changer, quand, et comment l’IA aide déjà le quantique.</p></div></div><ol class="list">
-<li class="src" data-type="officiel"><a class="card" href="https://cyber.gouv.fr/enjeux-technologiques/cryptographie-post-quantique/faq-pqc/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">FR</span><span>2026</span></div><h3>Cryptographie post-quantique : la FAQ</h3><p class="from">ANSSI</p><p class="sum">L’agence française de cybersécurité fixe les dates clés : exigences post-quantiques pour qualifier un produit à partir de 2027, et plus raisonnable d’acheter sans protection post-quantique après 2030. Elle insiste sur l’hybridation et sur l’inventaire de tous ses usages du chiffrement.</p></a></li>
-<li class="src" data-type="officiel"><a class="card" href="https://digital-strategy.ec.europa.eu/en/library/coordinated-implementation-roadmap-transition-post-quantum-cryptography" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">EN</span><span>Juin 2025</span></div><h3>Coordinated implementation roadmap for the transition to post-quantum cryptography</h3><p class="from">Commission européenne</p><p class="sum">La feuille de route commune des pays de l’Union européenne pour passer à la cryptographie post-quantique. Échéances : premiers plans et migrations fin 2026, systèmes à haut risque fin 2030, le plus de systèmes possible fin 2035.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://postquantum.com/security-pqc/nist-ir-8547-final/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">EN</span><span>Oct. 2026</span></div><h3>NIST finalizes its post-quantum transition plan (IR 8547)</h3><p class="from">PostQuantum</p><p class="sum">Le 27 octobre 2026, l’institut américain des normes publie son calendrier définitif : RSA et les courbes elliptiques sont dépréciés après 2030 et interdits après 2035, quelle que soit la taille de clé. La version finale est plus stricte que le brouillon de 2024.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://www.futura-sciences.com/sciences/definitions/cryptographie-quantique-cryptographie-post-quantique-28416/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">FR</span><span>Avril 2026</span></div><h3>Cryptographie post-quantique : qu’est-ce que c’est ?</h3><p class="from">Futura Sciences</p><p class="sum">Une définition courte des nouveaux algorithmes de chiffrement conçus pour résister aux ordinateurs quantiques. L’article situe l’horizon de la menace entre 2030 et 2035.</p></a></li>
-<li class="src" data-type="video"><a class="card" href="https://www.youtube.com/watch?v=-UrdExQW0cs" target="_blank" rel="noopener"><div class="meta"><span class="pill t-video">Vidéo</span><span class="lang">EN</span><span>2023</span></div><h3>How Quantum Computers Break The Internet… Starting Now</h3><p class="from">Veritasium</p><p class="sum">Une vidéo de vulgarisation très suivie sur l’algorithme de Shor et la menace « voler maintenant, déchiffrer plus tard ». Elle présente aussi les nouveaux cadenas fondés sur les réseaux euclidiens, la famille choisie depuis par le NIST.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://thequantuminsider.com/2026/10/29/alice-bob-22593-qubits-break-rsa-2048/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">EN</span><span>Oct. 2026</span></div><h3>Alice &amp; Bob: 22,593 qubits to break RSA-2048</h3><p class="from">The Quantum Insider</p><p class="sum">La startup parisienne estime qu’il faudrait 22 593 qubits de chat et environ trois jours pour casser RSA-2048, soit environ 40 fois moins de qubits que l’estimation de Google en 2025. Ce sont des projections théoriques, pas une attaque réelle.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://postquantum.com/security-pqc/google-quantum-bitcoin-ecdlp/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">EN</span><span>Mars 2026</span></div><h3>Google: breaking crypto’s elliptic curves needs far fewer resources</h3><p class="from">PostQuantum</p><p class="sum">Google Quantum AI montre qu’il faudrait environ 20 fois moins de ressources que prévu pour casser la cryptographie du Bitcoin et d’Ethereum. Fait inédit, l’équipe garde la méthode secrète et publie seulement une preuve mathématique qu’elle fonctionne.</p></a></li>
-<li class="src" data-type="officiel"><a class="card" href="https://blog.google/technology/google-deepmind/alphaqubit-quantum-error-correction/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">EN</span><span>Nov. 2024</span></div><h3>AlphaQubit tackles one of quantum computing’s biggest challenges</h3><p class="from">Google DeepMind</p><p class="sum">Google DeepMind présente AlphaQubit, une IA de la même famille que les grands modèles de langage, qui repère les erreurs des qubits mieux que les méthodes classiques. Sur les données de la puce Sycamore, elle fait 6 % d’erreurs de moins que la meilleure méthode lente et 30 % de moins qu’une méthode rapide.</p></a></li>
-<li class="src" data-type="cours"><a class="card" href="https://quantum.cloud.ibm.com/learning/courses" target="_blank" rel="noopener"><div class="meta"><span class="pill t-cours">Cours</span><span class="lang">EN</span><span>Gratuit</span></div><h3>IBM Quantum Learning, catalogue de cours</h3><p class="from">IBM</p><p class="sum">Le catalogue de cours gratuits d’IBM, dont une introduction pratique à la cryptographie résistante au quantique. Utile pour passer de la culture générale à la pratique, en anglais.</p></a></li>
-</ol></section>
-<section class="chapter" id="ch5" aria-labelledby="ch5-t"><div class="ch-head"><span class="num" aria-hidden="true">05</span><div><h2 id="ch5-t">Impact : vie quotidienne</h2><p>Ce qui a déjà changé sans que vous le voyiez, et comment essayer un vrai ordinateur quantique.</p></div></div><ol class="list">
-<li class="src" data-type="officiel"><a class="card" href="https://blog.cloudflare.com/post-quantum-roadmap/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">EN</span><span>Avril 2026</span></div><h3>Cloudflare targets 2029 for full post-quantum security</h3><p class="from">Cloudflare</p><p class="sum">Cloudflare avance à 2029 son objectif de sécurité post-quantique complète, comme Google, après les nouvelles estimations du printemps 2026. Plus de 65 % du trafic web humain qu’il transporte est déjà chiffré avec les nouveaux algorithmes.</p></a></li>
-<li class="src" data-type="officiel"><a class="card" href="https://signal.org/blog/spqr/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">EN</span><span>Oct. 2025</span></div><h3>Signal Protocol and post-quantum ratchets (SPQR)</h3><p class="from">Signal</p><p class="sum">Signal explique comment il renforce son chiffrement de bout en bout contre les futurs ordinateurs quantiques avec un nouveau mécanisme, le « Triple Ratchet ». Il complète PQXDH, la première protection post-quantique ajoutée par Signal en 2023.</p></a></li>
-<li class="src" data-type="cours"><a class="card" href="https://quantum.cloud.ibm.com/docs/guides/plans-overview" target="_blank" rel="noopener"><div class="meta"><span class="pill t-cours">Outil</span><span class="lang">EN</span><span>Gratuit</span></div><h3>IBM Quantum : 10 minutes gratuites sur un vrai ordinateur quantique</h3><p class="from">IBM</p><p class="sum">IBM offre 10 minutes de calcul gratuites sur ses vrais ordinateurs quantiques tous les 28 jours, sans carte bancaire. Au-delà, l’offre à l’usage coûte environ 96 dollars la minute de calcul.</p></a></li>
-</ol></section>
-<section class="chapter" id="ch6" aria-labelledby="ch6-t"><div class="ch-head"><span class="num" aria-hidden="true">06</span><div><h2 id="ch6-t">Mythes, limites &amp; à retenir</h2><p>Bitcoin, calendriers, stratégie française : démêler le vrai du faux.</p></div></div><ol class="list">
-<li class="src" data-type="officiel"><a class="card" href="https://www.info.gouv.fr/upload/media/mixed/0001/16/ab99c9a2bb614160003116268d2e588bf0c55aa5.pdf" target="_blank" rel="noopener"><div class="meta"><span class="pill t-officiel">Officiel</span><span class="lang">FR</span><span>Mai 2026</span></div><h3>Stratégie nationale quantique : communiqué du 22 mai 2026</h3><p class="from">Gouvernement</p><p class="sum">La France ajoute 1 milliard d’euros à sa stratégie quantique pour 2026-2030 et porte son objectif à 1 024 qubits logiques en 2032. Le texte fait aussi le bilan depuis 2021 : trois ordinateurs quantiques installés au CEA, et plus de masters et de doctorats.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://postquantum.com/quantum-threat-crypto/bitcoin-quantum-vulnerability/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">EN</span><span>2026</span></div><h3>Bitcoin’s quantum vulnerability</h3><p class="from">PostQuantum</p><p class="sum">Environ 6,7 millions de bitcoins, un tiers du total, ont une clé publique déjà visible et seraient les premiers exposés. L’article fait le point sur les parades proposées, encore sans consensus chez les développeurs.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://thequantuminsider.com/2026/08/07/post-quantum-cryptography-timelines/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">EN</span><span>Août 2026</span></div><h3>Post-quantum cryptography timelines: when will organizations migrate?</h3><p class="from">The Quantum Insider</p><p class="sum">Un tour d’horizon des échéances : NIST, Union européenne, Royaume-Uni, banques, Google et Cloudflare (2029), Microsoft (2033). Les dates officielles s’étalent de 2027 à 2035, celles des entreprises les plus avancées se resserrent autour de 2029.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://www.maddyness.com/2025/05/15/quantique-la-france-est-en-tete-theau-peronnin-alice-bob/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">FR</span><span>Mai 2025</span></div><h3>Quantique : « la France est en tête », Théau Peronnin (Alice &amp; Bob)</h3><p class="from">Maddyness</p><p class="sum">Le PDG d’Alice &amp; Bob détaille sa feuille de route : 100 qubits logiques avec la machine Graphène d’ici 2030, et un laboratoire de 50 millions de dollars à Paris. Il explique aussi ce qui distingue les qubits de chat des autres approches.</p></a></li>
-</ol></section>
-<section class="glossary" id="glossaire" aria-labelledby="glossaire-t"><div class="ch-head"><span class="num" aria-hidden="true">Aa</span><div><h2 id="glossaire-t">Glossaire</h2><p>Les 18 mots de la présentation, en une ou deux phrases chacun.</p></div></div><h3 class="g-group">Les bases</h3><dl class="gloss"><div class="term"><dt>Qubit</dt><dd>L’unité d’information d’un ordinateur quantique, l’équivalent du bit, qui vaut 0 ou 1. Avant d’être mesuré, un qubit peut être dans une superposition de 0 et de 1.</dd></div><div class="term"><dt>Mesure</dt><dd>Lire la valeur d’un qubit. Le résultat est toujours 0 ou 1, avec des probabilités fixées par l’état du qubit, et la superposition est perdue.</dd></div><div class="term"><dt>Porte quantique</dt><dd>Une opération élémentaire sur un ou deux qubits, comme les portes logiques ET, OU et NON d’un processeur. Un programme quantique, ou circuit, enchaîne des portes puis des mesures.</dd></div></dl><h3 class="g-group">Les 4 principes</h3><dl class="gloss"><div class="term"><dt>Superposition</dt><dd>Un qubit peut être dans un état qui mélange 0 et 1, avec un « poids » pour chacun, appelé amplitude. Ces amplitudes fixent les chances de lire 0 ou 1 à la mesure.</dd></div><div class="term"><dt>Intrication</dt><dd>Un lien entre qubits qui ne forment plus qu’un seul système : mesurer l’un renseigne aussitôt sur les autres, même à distance. Ce lien ne permet pas pour autant d’envoyer un message plus vite que la lumière.</dd></div><div class="term"><dt>Interférence</dt><dd>Comme des vagues, les amplitudes peuvent s’additionner ou s’annuler. Un algorithme quantique s’en sert pour renforcer les bonnes réponses et effacer les mauvaises.</dd></div><div class="term"><dt>Décohérence</dt><dd>La perte de l’état quantique au contact de l’environnement : chaleur, vibrations, ondes parasites. C’est l’ennemi numéro un, d’où le froid extrême et l’isolation des machines.</dd></div></dl><h3 class="g-group">Construire une machine fiable</h3><dl class="gloss"><div class="term"><dt>Qubit physique</dt><dd>Un qubit réel : circuit supraconducteur, ion ou atome piégé, photon. Il reste fragile : même les meilleurs se trompent environ une fois sur mille opérations.</dd></div><div class="term"><dt>Qubit logique</dt><dd>Un qubit fiable obtenu en faisant travailler ensemble plusieurs qubits physiques qui se surveillent. C’est ce chiffre qu’il faut regarder pour juger une machine.</dd></div><div class="term"><dt>Correction d’erreurs</dt><dd>Des méthodes qui repèrent et réparent les erreurs sans lire directement les données, en répartissant l’information sur plusieurs qubits physiques. Le « code de surface » utilisé par Google en est l’exemple le plus connu.</dd></div><div class="term"><dt>Qubit de chat</dt><dd>La technologie d’Alice &amp; Bob, nommée d’après le chat de Schrödinger. Ces qubits sont protégés par construction contre un type d’erreur, l’inversion de bit, ce qui réduit le nombre de qubits nécessaires.</dd></div><div class="term"><dt>Réfrigérateur à dilution</dt><dd>Le « lustre doré » des photos d’ordinateurs quantiques. Il refroidit les qubits supraconducteurs vers 0,01 kelvin, plus froid que l’espace.</dd></div><div class="term"><dt>NISQ</dt><dd>« Noisy Intermediate-Scale Quantum » : l’ère actuelle, avec des machines de quelques dizaines à quelques milliers de qubits encore trop bruités. Le terme a été proposé en 2018 par le physicien John Preskill.</dd></div></dl><h3 class="g-group">Algorithmes et sécurité</h3><dl class="gloss"><div class="term"><dt>Avantage quantique</dt><dd>Le moment où un ordinateur quantique résout un problème hors de portée des meilleurs supercalculateurs (on parlait autrefois de « suprématie »). Les démonstrations portent souvent sur des problèmes choisis pour l’occasion, sans usage pratique.</dd></div><div class="term"><dt>Algorithme de Shor</dt><dd>Un algorithme de 1994 qui factorise les grands nombres bien plus vite que les meilleures méthodes classiques. Sur une machine assez grande, il casserait RSA et les courbes elliptiques, qui protègent aujourd’hui une grande partie d’Internet.</dd></div><div class="term"><dt>Algorithme de Grover</dt><dd>Un algorithme de 1996 qui accélère la recherche : environ √N essais au lieu de N. Contre un chiffrement symétrique comme AES, il suffit d’allonger les clés, par exemple avec AES-256.</dd></div><div class="term"><dt>Cryptographie post-quantique</dt><dd>De nouveaux algorithmes de chiffrement qui tournent sur nos ordinateurs actuels mais résistent aux ordinateurs quantiques. Le NIST a publié les premiers standards en 2024 : ML-KEM pour l’échange de clés, ML-DSA pour les signatures.</dd></div><div class="term"><dt>« Récolter maintenant, déchiffrer plus tard »</dt><dd>Intercepter et stocker dès aujourd’hui des données chiffrées, pour les déchiffrer le jour où un ordinateur quantique en sera capable. C’est pour cela que la migration doit commencer maintenant, surtout pour les secrets qui doivent rester secrets longtemps.</dd></div></dl></section>
-<section class="chapter" id="plus" aria-labelledby="plus-t"><div class="ch-head"><span class="num" aria-hidden="true">+</span><div><h2 id="plus-t">Pour aller plus loin</h2><p>Vidéos, podcasts et ressources longues pour continuer après la présentation.</p></div></div><ol class="list">
-<li class="src" data-type="video"><a class="card" href="https://www.youtube.com/results?search_query=Dr+Nozman+Voici+un+vrai+ordinateur+quantique" target="_blank" rel="noopener"><div class="meta"><span class="pill t-video">Vidéo</span><span class="lang">FR</span><span>2023 · 16 min</span><span class="hint">recherche YouTube</span></div><h3>Voici un vrai ordinateur quantique (c’est dingue)</h3><p class="from">Dr Nozman, chez Alice &amp; Bob</p><p class="sum">Le vulgarisateur visite les laboratoires d’Alice &amp; Bob à Paris pour voir un ordinateur quantique en vrai : une puce d’environ un centimètre au bout d’un énorme réfrigérateur. Il explique aussi pourquoi on n’aura sans doute jamais d’ordinateur quantique sur son bureau.</p></a></li>
-<li class="src" data-type="podcast"><a class="card" href="https://open.spotify.com/search/Underscore%20Martin%20Bruder%20informatique%20quantique/episodes" target="_blank" rel="noopener"><div class="meta"><span class="pill t-podcast">Podcast</span><span class="lang">FR</span><span>Mai 2024 · 1 h</span><span class="via">Spotify</span></div><h3>Vous allez ENFIN comprendre l’informatique quantique</h3><p class="from">Underscore_ (Micode), avec Martin Bruder</p><p class="sum">Martin Bruder, ancien enseignant à l’université Carnegie-Mellon, explique pas à pas d’où vient la puissance du calcul quantique, à partir d’un petit algorithme, celui de Deutsch. L’épisode précise aussi ce que le quantique ne changera pas, comme les jeux vidéo ou l’IA.</p></a></li>
-<li class="src" data-type="podcast"><a class="card" href="https://open.spotify.com/search/Decode%20Quantum%20Alice%20Bob%20Perrault%20Guillaud%20Ruiz/episodes" target="_blank" rel="noopener"><div class="meta"><span class="pill t-podcast">Podcast</span><span class="lang">FR</span><span>Juin 2024 · 56 min</span><span class="via">Spotify</span></div><h3>À la rencontre de Cécile Perrault, Jérémie Guillaud et Diego Ruiz d’Alice &amp; Bob</h3><p class="from">Decode Quantum</p><p class="sum">Trois membres d’Alice &amp; Bob, chargée de l’innovation, responsable de la théorie et doctorant, racontent leur parcours et le quotidien d’une startup du quantique. C’est le deuxième passage de l’entreprise dans l’émission, après ses deux cofondateurs en 2020.</p></a></li>
-<li class="src" data-type="article"><a class="card" href="https://www.frenchweb.fr/decode-quantum-michel-devoret-recoit-le-prix-nobel-de-physique-2025/457668" target="_blank" rel="noopener"><div class="meta"><span class="pill t-article">Article</span><span class="lang">FR</span><span>Oct. 2025</span></div><h3>Michel Devoret reçoit le prix Nobel de physique 2025</h3><p class="from">FrenchWeb</p><p class="sum">Un portrait de Michel Devoret, qui retrace son parcours de Télécom Paris à l’université Yale et ses quarante ans de travaux sur les circuits supraconducteurs. On y comprend comment son équipe a été l’une des premières à montrer un comportement quantique dans ces circuits.</p></a></li>
-<li class="src" data-type="podcast"><a class="card" href="https://open.spotify.com/show/2Fsbam3C0XXnSWwPQ7Bom4" target="_blank" rel="noopener"><div class="meta"><span class="pill t-podcast">Podcast</span><span class="lang">FR</span><span>Série</span><span class="via">Spotify</span></div><h3>Decode Quantum, l’émission</h3><p class="from">Fanny Bouton et Olivier Ezratty</p><p class="sum">Des entretiens longs avec les chercheurs et les fondateurs du quantique, de Quandela au CEA en passant par AWS et IBM. Plus de 80 épisodes, pour les plus curieux qui veulent entendre les acteurs eux-mêmes.</p></a></li>
-<li class="src" data-type="cours"><a class="card" href="https://www.oezratty.net/wordpress/understanding-quantum-technologies/" target="_blank" rel="noopener"><div class="meta"><span class="pill t-cours">Cours</span><span class="lang">EN</span><span>PDF gratuit</span></div><h3>Understanding Quantum Technologies</h3><p class="from">Olivier Ezratty</p><p class="sum">Le livre de référence d’Olivier Ezratty, mis à jour chaque année depuis 2018 et téléchargeable gratuitement en PDF. Plus de 1 500 pages, avec une version courte d’une quarantaine de pages pour commencer.</p></a></li>
-<li class="src" data-type="cours"><a class="card" href="https://quantum.cloud.ibm.com/learning/en/courses/basics-of-quantum-information" target="_blank" rel="noopener"><div class="meta"><span class="pill t-cours">Cours</span><span class="lang">EN</span><span>Gratuit · badge</span></div><h3>Basics of quantum information</h3><p class="from">IBM Quantum Learning (John Watrous)</p><p class="sum">Le premier cours d’une série de quatre, qui pose les bases mathématiques de l’information quantique : qubits, mesures, circuits. Un examen final permet d’obtenir un badge IBM.</p></a></li>
-</ol></section>
-<p class="empty" id="empty">Aucune ressource de ce type ici. Choisissez « Tout » pour tout revoir.</p>
+  <header class="hero">
+    <p class="kicker">Forum Technique 2026 · MAALSI 25-2</p>
+    <h1>Informatique quantique</h1>
+    <p class="lead">Une présentation en trois parties : les sources classées par chapitre avec un glossaire, un quiz pour tester les idées reçues, et les slides complètes.</p>
+
+    <ol class="hub">
+      <li><a href="sources/"><span class="num" aria-hidden="true">38</span><h2>Sources &amp; ressources</h2><p>Toutes les sources de la présentation, classées par chapitre et résumées en deux phrases, plus un glossaire de 18 mots.</p><span class="go">Explorer les sources →</span></a></li>
+      <li><a href="quiz/"><span class="num" aria-hidden="true">?</span><h2>Quiz : vrai ou faux</h2><p>9 idées reçues sur l’ordinateur quantique, dont les 6 de la présentation, à démêler une par une.</p><span class="go">Faire le quiz →</span></a></li>
+      <li><a href="slides/"><span class="num" aria-hidden="true">▸</span><h2>Slides</h2><p>Le diaporama complet de la présentation, pour le revoir ou le présenter soi-même.</p><span class="go">Revoir les slides →</span></a></li>
+    </ol>
+  </header>
 </main>
 
-<footer class="wrap">
+<footer>
   <span><strong>Introduction à l’informatique quantique</strong> · Forum Technique 2026 · MAALSI 25-2</span>
-  <span>Résumés rédigés pour cette page. Les liens marqués « recherche YouTube » ouvrent la recherche du titre exact de la vidéo.</span>
+  <span>Relevé le 18 novembre 2026.</span>
 </footer>
-
-<script>
-(() => {
-  "use strict";
-  const buttons = Array.from(document.querySelectorAll(".filters button"));
-  const items = Array.from(document.querySelectorAll("main .src"));
-  const chapters = Array.from(document.querySelectorAll("main .chapter"));
-  const empty = document.getElementById("empty");
-  function apply(f) {
-    buttons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === f)));
-    items.forEach((li) => { li.hidden = !(f === "all" || li.dataset.type === f); });
-    let any = false;
-    chapters.forEach((sec) => {
-      const visible = sec.querySelectorAll(".src:not([hidden])").length > 0;
-      sec.classList.toggle("is-empty", !visible);
-      if (visible) any = true;
-    });
-    empty.style.display = any ? "none" : "block";
-  }
-  buttons.forEach((b) => b.addEventListener("click", () => apply(b.dataset.filter)));
-  document.querySelectorAll(".chips").forEach((c) => {
-    const upd = () => c.classList.toggle("more", c.scrollLeft + c.clientWidth < c.scrollWidth - 4);
-    c.addEventListener("scroll", upd, { passive: true });
-    window.addEventListener("resize", upd);
-    upd();
-  });
-})();
-</script>
-<script>
-(() => {
-  "use strict";
-  const root = document.getElementById("quiz");
-  const dataEl = document.getElementById("quiz-data");
-  if (!root || !dataEl) return;
-  const Q = JSON.parse(dataEl.textContent);
-  const ORDER = ["vrai", "nuance", "faux"];
-  const LABEL = { vrai: "Vrai", nuance: "Ça dépend", faux: "Faux" };
-  const ICON = { vrai: "✓", nuance: "≈", faux: "✕" };
-  const SAY = { vrai: "c’est vrai.", nuance: "ça dépend.", faux: "c’est faux." };
-  const NB = " ", NNB = " ";
-  let i = 0, score = 0, found = [];
-
-  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
-  const quote = (t) => "«" + NB + t.replace(/\.$/, "") + NB + "»";
-  const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function bringIntoView() {
-    const top = root.getBoundingClientRect().top;
-    if (top < 90 || top > window.innerHeight * 0.6) root.scrollIntoView({ block: "start", behavior: reduced() ? "auto" : "smooth" });
-  }
-  function head(progress) {
-    const top = el("div", "q-top");
-    const c = el("span"); c.append("Question ", el("b", null, String(Math.min(i + 1, Q.length))), " / " + Q.length);
-    const s = el("span"); s.append("Score" + NB + ": ", el("b", "q-pts", String(score)));
-    top.append(c, s);
-    const bar = el("div", "q-bar"); const fill = el("i"); bar.append(fill);
-    fill.style.width = (progress / Q.length * 100) + "%";
-    return [top, bar];
-  }
-  function question() {
-    const q = Q[i];
-    root.replaceChildren(...head(i));
-    root.append(el("p", "q-text", quote(q.q)));
-    const choices = el("div", "q-choices");
-    choices.setAttribute("role", "group"); choices.setAttribute("aria-label", "Votre réponse");
-    ORDER.forEach((a) => {
-      const b = el("button"); b.type = "button"; b.dataset.a = a;
-      const ic = el("span", "ic", ICON[a]); ic.setAttribute("aria-hidden", "true");
-      b.append(ic, el("span", null, LABEL[a]));
-      b.addEventListener("click", () => answer(a, choices));
-      choices.append(b);
-    });
-    const out = el("div", "q-answer"); out.hidden = true; out.setAttribute("aria-live", "polite");
-    root.append(choices, out);
-  }
-  function answer(a, choices) {
-    const q = Q[i];
-    const ok = a === q.a;
-    const near = !ok && (a === "nuance" || q.a === "nuance");
-    if (ok) score++;
-    found.push(ok);
-    choices.querySelectorAll("button").forEach((b) => {
-      b.disabled = true;
-      if (b.dataset.a === q.a) b.classList.add("is-right");
-      else if (b.dataset.a === a) b.classList.add("is-wrong");
-      else b.classList.add("is-dim");
-    });
-    root.querySelector(".q-pts").textContent = String(score);
-    root.querySelector(".q-bar i").style.width = ((i + 1) / Q.length * 100) + "%";
-    const out = root.querySelector(".q-answer");
-    const v = el("p", "q-verdict " + (ok ? "ok" : near ? "near" : "ko"),
-      (ok ? "Bien vu, " : near ? "Presque" + NB + ": " : "Raté" + NB + ": ") + SAY[q.a]);
-    const exp = el("p", "q-exp", q.exp);
-    const src = el("a", "q-src", "Source" + NB + ": " + q.src + " ↗");
-    src.href = q.url; src.target = "_blank"; src.rel = "noopener";
-    const last = i === Q.length - 1;
-    const next = el("button", "btn primary q-next", last ? "Voir mon score" : "Question suivante");
-    next.type = "button";
-    next.addEventListener("click", () => {
-      i++;
-      if (last) end(); else question();
-      bringIntoView();
-      const f = root.querySelector(".q-choices button, .q-again");
-      if (f) f.focus({ preventScroll: true });
-    });
-    out.replaceChildren(v, exp, src, next);
-    out.hidden = false;
-    next.focus({ preventScroll: true });
-  }
-  function end() {
-    root.replaceChildren(...head(Q.length));
-    root.querySelector(".q-top span").textContent = "Terminé";
-    const s = el("p", "q-score"); s.append(String(score), el("span", null, " / " + Q.length));
-    const r = score / Q.length;
-    const msg = score === Q.length ? "Sans faute" + NNB + "! Vous pourriez faire la présentation à notre place."
-      : r >= 0.75 ? "Très bien" + NB + ": les idées reçues ne vous résistent pas."
-      : r >= 0.4 ? "Pas mal" + NNB + "! Relisez les explications, elles valent le détour."
-      : "Les idées reçues ont la vie dure" + NB + ": c’est tout le sujet de la présentation.";
-    root.append(s, el("p", "q-msg", msg));
-    const ol = el("ol", "recap");
-    Q.forEach((q, k) => {
-      const li = el("li");
-      const ic = el("span", "ic r-" + q.a, ICON[q.a]); ic.setAttribute("aria-hidden", "true");
-      const txt = el("div");
-      txt.append(el("b", null, quote(q.q)), el("small", null, LABEL[q.a] + NB + ": " + q.short));
-      li.append(ic, txt, el("span", "you " + (found[k] ? "ok" : "ko"), found[k] ? "Trouvé" : "Raté"));
-      ol.append(li);
-    });
-    const cta = el("div", "cta");
-    const again = el("button", "btn primary q-again", "Rejouer"); again.type = "button";
-    again.addEventListener("click", () => {
-      i = 0; score = 0; found = [];
-      question(); bringIntoView();
-      root.querySelector(".q-choices button").focus({ preventScroll: true });
-    });
-    const slides = el("a", "btn", "Revoir la slide des mythes"); slides.href = "slides/#18";
-    cta.append(again, slides);
-    root.append(ol, cta);
-  }
-  question();
-})();
-</script>
-<button type="button" id="toTop" aria-label="Retour en haut" title="Retour en haut">↑</button>
-<script>
-(() => {
-  "use strict";
-  const btn = document.getElementById("toTop");
-  if (!btn) return;
-  const toggle = () => btn.classList.toggle("show", window.scrollY > 480);
-  window.addEventListener("scroll", toggle, { passive: true });
-  toggle();
-  btn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-  });
-})();
-</script>
 </body>
 </html>

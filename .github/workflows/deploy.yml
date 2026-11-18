@@ -55,6 +55,8 @@ jobs:
       - name: Vérifier que le site répond
         run: |
           sleep 2
-          curl -fsS -o /dev/null -w "Sources : HTTP %{http_code}\n" https://quantique.romainmurier.com/
-          curl -fsS -o /dev/null -w "Jeu : HTTP %{http_code}\n" https://quantique.romainmurier.com/jeu/
+          curl -fsS -o /dev/null -w "Accueil : HTTP %{http_code}\n" https://quantique.romainmurier.com/
+          curl -fsS -o /dev/null -w "Sources : HTTP %{http_code}\n" https://quantique.romainmurier.com/sources/
+          curl -fsS -o /dev/null -w "Quiz : HTTP %{http_code}\n" https://quantique.romainmurier.com/quiz/
+          curl -fsS -o /dev/null -w "Slides : HTTP %{http_code}\n" https://quantique.romainmurier.com/slides/
           echo "Déployé sur https://quantique.romainmurier.com" >> "$GITHUB_STEP_SUMMARY"
