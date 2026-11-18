@@ -133,8 +133,8 @@
   /* UI */
   #progress{position:fixed;left:0;top:0;height:4px;background:var(--grad);transition:width .4s ease;z-index:10}
   #ui{position:fixed;right:18px;bottom:14px;display:flex;gap:8px;align-items:center;z-index:10;font-size:13px;color:#7f88c0}
-  #ui button{background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--text);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:16px}
-  #ui button:hover{background:rgba(255,255,255,.14)}
+  #ui button,#ui a{background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--text);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:16px;display:grid;place-items:center;text-decoration:none}
+  #ui button:hover,#ui a:hover{background:rgba(255,255,255,.14)}
   #notes{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);max-width:880px;width:calc(100% - 32px);background:rgba(8,12,40,.94);border:1px solid var(--line);border-radius:14px;padding:16px 20px;font-size:15px;line-height:1.5;color:#cfd5f5;display:none;z-index:11}
   #notes.show{display:block}
   #notes b{color:var(--cyan);font-size:12px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:4px}
@@ -855,6 +855,7 @@
 <div id="notes"><b>Notes orateur</b><span id="notesText"></span></div>
 <div id="help">← → naviguer · F plein écran · N notes</div>
 <div id="ui">
+  <a id="homeBtn" href="../" aria-label="Retour à l’accueil du site" title="Retour à l’accueil">⌂</a>
   <button id="prevBtn" aria-label="Précédent">‹</button>
   <span id="counter">1 / 1</span>
   <button id="nextBtn" aria-label="Suivant">›</button>
